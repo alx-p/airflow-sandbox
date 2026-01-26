@@ -13,7 +13,8 @@ docker-compose up
 Добавление пользователя для входа:
 1. Заходим в контейнер: docker exec -it airflow-webserver-1 bash
 2. Выполняем команду:
-```
+
+``` 
 airflow users create \
        --role Admin \
        --username admin \
