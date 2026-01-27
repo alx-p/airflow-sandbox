@@ -6,7 +6,7 @@ from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.operators.python_operator import PythonOperator
 
 
-# Функция для получения данных из API
+# Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РґР°РЅРЅС‹С… РёР· API
 def fetch_data_from_api():
     response = requests.get('https://jsonplaceholder.typicode.com/todos')
     return response.json()
@@ -26,7 +26,7 @@ dag = DAG(
     dag_id='fetch_and_load_data',
     default_args=default_args,
     description='Fetch data from an API and load it into a database',
-    schedule_interval=None, # Измените на нужное расписание, например '@daily' для ежедневного запуска
+    schedule_interval=None, # РР·РјРµРЅРёС‚Рµ РЅР° РЅСѓР¶РЅРѕРµ СЂР°СЃРїРёСЃР°РЅРёРµ, РЅР°РїСЂРёРјРµСЂ '@daily' РґР»СЏ РµР¶РµРґРЅРµРІРЅРѕРіРѕ Р·Р°РїСѓСЃРєР°
     start_date=days_ago(2)
 )
 
