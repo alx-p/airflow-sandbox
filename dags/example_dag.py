@@ -27,7 +27,11 @@ dag = DAG(
     default_args=default_args,
     description='Fetch data from an API and load it into a database',
     schedule_interval=None, # Измените на нужное расписание, например '@daily' для ежедневного запуска
+<<<<<<< HEAD
     start_date=days_ago(1)
+=======
+    start_date=days_ago(2)
+>>>>>>> b49a0a317b153e6fbbb228bafffabe39c17629f2
 )
 
 create_table_task = PostgresOperator(
