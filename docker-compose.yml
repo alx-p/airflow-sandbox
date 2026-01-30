@@ -2,15 +2,9 @@ services:
   postgres:
     image: postgres:13.22-bookworm
     environment:
-<<<<<<< HEAD
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: airflow_db
-=======
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
       POSTGRES_DB: airflow
->>>>>>> 68e8c21 (v.1.0.0)
     ports:
       - "5432:5432"
     volumes:

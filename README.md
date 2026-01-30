@@ -2,14 +2,16 @@
 
 Запуск окружения:
 
-docker compose up --build
+```
+sudo docker compose up
+```
 
-В случае ошибки "ERROR: You need to initialize the database. Please run `airflow db init`. Make sure the command is run using Airflow version 2.5.1." выполнить airflow db init вручную:
+В случае ошибки "ERROR: You need to initialize the database. Please run `airflow db init`" выполнить airflow db init вручную:
 
 ```
-docker compose down
+sudo docker compose down
 sudo docker compose run --rm airflow-webserver airflow db migrate
-docker compose up
+sudo docker compose up
 ```
 
 Добавление пользователя для входа:

@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-dags/__pycache__/example_dag.cpython-310.pyc
 *.pyc
-=======
 temp
->>>>>>> 68e8c21 (v.1.0.0)
+.gitignore
