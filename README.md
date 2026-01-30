@@ -8,7 +8,7 @@ docker compose up --build
 
 ```
 docker compose down
-docker compose run --rm webserver airflow db init
+sudo docker compose run --rm airflow-webserver airflow db migrate
 docker compose up
 ```
 
@@ -25,3 +25,30 @@ airflow users create \
        --lastname User \
        --password new_secure_password
 ```
+
+Либо сразу:
+
+```
+sudo docker compose exec airflow-webserver airflow users create \
+    --username admin \
+    --firstname Admin \
+    --lastname User \
+    --role Admin \
+    --email admin@example.com \
+    --password admin
+```
+
+Шпаргалка
+
+Рестарт сервисов:
+
+```
+docker compose restart webserver
+docker compose restart scheduler
+```
+
+Отключение тестовых примеров: 
+AIRFLOW__CORE__LOAD_EXAMPLES=False
+
+Отображение конфига в Airflow UI
+AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True

@@ -1,32 +1,55 @@
-# version: '3'
 services:
   postgres:
-    image: postgres:13.22-bookworm #postgres:latest
+    image: postgres:13.22-bookworm
     environment:
+<<<<<<< HEAD
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: airflow_db
+=======
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+>>>>>>> 68e8c21 (v.1.0.0)
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
-  webserver:
-    build: .
+  airflow-webserver:
+    image: apache/airflow:2.10.5
     command: airflow webserver
-    depends_on:
-      - postgres
     environment:
-      AIRFLOW__CORE__EXECUTOR: LocalExecutor
-      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin:password@postgres/mydatabase
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=True
+      - AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
+    user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-0}"
     volumes:
       - ./dags:/opt/airflow/dags
+      - airflow_logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
     ports:
       - "8080:8080"
-
-  scheduler:
-    build: .
-    command: airflow scheduler
     depends_on:
       - postgres
+
+  airflow-scheduler:
+    image: apache/airflow:2.10.5
+    command: airflow scheduler
     environment:
-      AIRFLOW__CORE__EXECUTOR: LocalExecutor
-      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin:password@postgres/mydatabase
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=True
+      - AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
+    user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-0}"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - airflow_logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+  airflow_logs:
