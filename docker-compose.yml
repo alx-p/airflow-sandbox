@@ -1,6 +1,7 @@
 services:
   postgres:
     image: postgres:13.22-bookworm
+    container_name: airflow-sandbox-pg
     environment:
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
@@ -8,10 +9,11 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./pg_data:/var/lib/postgresql/data
 
   airflow-webserver:
     image: apache/airflow:2.10.5
+    container_name: airflow-sandbox-webserver
     command: airflow webserver
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
@@ -21,8 +23,7 @@ services:
     user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-0}"
     volumes:
       - ./dags:/opt/airflow/dags
-      - airflow_logs:/opt/airflow/logs
-      - ./plugins:/opt/airflow/plugins
+      #- ./airflow_logs:/opt/airflow/logs
     ports:
       - "8080:8080"
     depends_on:
@@ -30,6 +31,7 @@ services:
 
   airflow-scheduler:
     image: apache/airflow:2.10.5
+    container_name: airflow-sandbox-scheduler
     command: airflow scheduler
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
@@ -39,11 +41,10 @@ services:
     user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-0}"
     volumes:
       - ./dags:/opt/airflow/dags
-      - airflow_logs:/opt/airflow/logs
-      - ./plugins:/opt/airflow/plugins
+      #- ./airflow_logs:/opt/airflow/logs
     depends_on:
       - postgres
 
 volumes:
-  postgres_data:
-  airflow_logs:
+  pg_data:
+  #airflow_logs:
