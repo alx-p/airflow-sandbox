@@ -1,5 +1,9 @@
 # airflow-sandbox
 
+AirFlow UI:
+http://localhost:8080/ 
+
+
 Запуск окружения:
 
 ```
