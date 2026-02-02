@@ -1,3 +1,4 @@
 *.pyc
 temp
 .gitignore
+pg_data
