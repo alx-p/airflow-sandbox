@@ -59,4 +59,6 @@ AIRFLOW__CORE__LOAD_EXAMPLES=False
 ```
 
 Отображение конфига в Airflow UI
+```
 AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
+```
