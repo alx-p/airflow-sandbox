@@ -54,7 +54,9 @@ docker compose restart scheduler
 ```
 
 Отключение тестовых примеров: 
+```
 AIRFLOW__CORE__LOAD_EXAMPLES=False
+```
 
 Отображение конфига в Airflow UI
 AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
