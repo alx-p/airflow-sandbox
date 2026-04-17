@@ -19,7 +19,7 @@ sudo docker compose up
 ```
 
 Добавление пользователя для входа:
-1. Заходим в контейнер: docker exec -it airflow-webserver-1 bash
+1. Заходим в контейнер: sudo docker exec -it airflow-sandbox-webserver bash
 2. Выполняем команду:
 
 ``` 

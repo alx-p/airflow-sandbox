@@ -2,3 +2,5 @@
 temp
 .gitignore
 pg_data
+data
+bkp
