@@ -21,7 +21,6 @@ def fetch_todos():
     return response.json()
 
 def create_table():
-    """Create todos table if not exists"""
     conn = psycopg2.connect(
         dbname=DB_NAME,
         user=DB_USER,
@@ -46,7 +45,6 @@ def create_table():
     conn.close()
 
 def load_todos_to_postgres(**kwargs):
-    """Load todos data into PostgreSQL"""
     todos = kwargs['ti'].xcom_pull(task_ids='fetch_todos')
 
     conn = psycopg2.connect(
